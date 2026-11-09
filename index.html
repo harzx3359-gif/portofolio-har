@@ -16,8 +16,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
-  <!-- Vanilla Tilt JS untuk Efek 3D Card -->
+  <!-- Vanilla Tilt JS (Efek 3D Card GitHub) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+
+  <!-- AOS CSS (Animate On Scroll GitHub) -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
   <script>
     tailwind.config = {
@@ -48,8 +51,46 @@
       color: #f3f4f6;
       overflow-x: hidden;
     }
+
+    /* Kursor Neon Kustom GitHub */
+    @media (pointer: fine) {
+      body {
+        cursor: none;
+      }
+    }
+
+    #custom-cursor {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #60a5fa;
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s, background-color 0.2s;
+      z-index: 9999;
+      box-shadow: 0 0 15px rgba(96, 165, 250, 0.8);
+    }
+
+    #cursor-dot {
+      width: 6px;
+      height: 6px;
+      background-color: #3b82f6;
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 10000;
+    }
+
+    .cursor-hover #custom-cursor {
+      width: 45px;
+      height: 45px;
+      background-color: rgba(59, 130, 246, 0.15);
+      border-color: #06b6d4;
+    }
     
-    /* Background Star Canvas Fix */
+    /* Canvas Background Bintang */
     #starfield {
       position: fixed;
       top: 0;
@@ -60,7 +101,7 @@
       pointer-events: none;
     }
 
-    /* Glassmorphism card effect */
+    /* Glassmorphism Card Effect */
     .glass-card {
       background: rgba(20, 24, 45, 0.6);
       backdrop-filter: blur(12px);
@@ -74,7 +115,7 @@
       box-shadow: 0 0 25px rgba(59, 130, 246, 0.25);
     }
 
-    /* Floating navigation glow header */
+    /* Header Navigasi Melayang */
     .glass-header {
       background: rgba(11, 13, 25, 0.75);
       backdrop-filter: blur(16px);
@@ -82,12 +123,12 @@
       border-bottom: 1px solid rgba(59, 130, 246, 0.2);
     }
 
-    /* Glow text effect */
+    /* Glow text */
     .glow-text {
       text-shadow: 0 0 15px rgba(96, 165, 250, 0.6);
     }
 
-    /* Cursor animation for dynamic typing */
+    /* Cursor animation dynamic typing */
     .typing-cursor::after {
       content: '|';
       animation: blink 1s infinite;
@@ -98,7 +139,7 @@
       50% { opacity: 0; }
     }
 
-    /* Nebula Background Orbs */
+    /* Cahaya Orbs Nebula */
     .nebula-orb {
       position: absolute;
       border-radius: 50%;
@@ -113,7 +154,7 @@
       100% { transform: translate(30px, 40px) scale(1.1); }
     }
 
-    /* 3D Transform Context untuk Card Foto */
+    /* 3D Transform Wrapper */
     .card-3d-wrapper {
       transform-style: preserve-3d;
     }
@@ -124,29 +165,33 @@
 </head>
 <body class="relative min-h-screen selection:bg-blue-500 selection:text-white">
 
+  <!-- Elements Kursor Kustom -->
+  <div id="custom-cursor" class="hidden md:block"></div>
+  <div id="cursor-dot" class="hidden md:block"></div>
+
   <!-- Canvas Background Efek Bintang -->
   <canvas id="starfield"></canvas>
 
   <!-- Element Cahaya Nebula -->
   <div class="nebula-orb w-[350px] h-[350px] bg-blue-600 top-10 left-[-50px]"></div>
-  <div class="nebula-orb w-[400px] h-[400px] bg-cyan-600 bottom-20 right-[-100px] animation-delay-2000"></div>
+  <div class="nebula-orb w-[400px] h-[400px] bg-cyan-600 bottom-20 right-[-100px]"></div>
 
   <!-- Floating Navigation Header -->
   <header class="fixed top-0 left-0 w-full z-50 glass-header px-6 py-4 transition-all duration-300">
     <div class="max-w-6xl mx-auto flex items-center justify-between">
-      <a href="#" class="font-display text-xl font-bold tracking-wider text-white flex items-center gap-2">
+      <a href="#" class="font-display text-xl font-bold tracking-wider text-white flex items-center gap-2 hover-target">
         <i class="fa-solid me-2 fa-meteor text-blue-400"></i>
         <span>KHOIRUL<span class="text-blue-400">.</span></span>
       </a>
 
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
-        <a href="#home" class="hover:text-blue-400 transition-colors">Beranda</a>
-        <a href="#about" class="hover:text-blue-400 transition-colors">Tentang</a>
-        <a href="#hobi" class="hover:text-blue-400 transition-colors">Hobi & Keahlian</a>
-        <a href="#kontak" class="hover:text-blue-400 transition-colors">Kontak</a>
+        <a href="#home" class="hover:text-blue-400 transition-colors hover-target">Beranda</a>
+        <a href="#about" class="hover:text-blue-400 transition-colors hover-target">Tentang</a>
+        <a href="#hobi" class="hover:text-blue-400 transition-colors hover-target">Hobi & Keahlian</a>
+        <a href="#kontak" class="hover:text-blue-400 transition-colors hover-target">Kontak</a>
       </nav>
 
-      <a href="#kontak" class="px-4 py-2 rounded-full text-xs font-semibold bg-blue-600 hover:bg-blue-500 text-white transition-all shadow-[0_0_15px_rgba(59,130,246,0.5)]">
+      <a href="#kontak" class="px-4 py-2 rounded-full text-xs font-semibold bg-blue-600 hover:bg-blue-500 text-white transition-all shadow-[0_0_15px_rgba(59,130,246,0.5)] hover-target">
         Hubungi Saya
       </a>
     </div>
@@ -158,7 +203,7 @@
     <section id="home" class="min-h-[75vh] flex flex-col-reverse lg:flex-row justify-center lg:items-center gap-12 relative py-8">
       
       <!-- Bagian Teks (Kiri) -->
-      <div class="flex-1 flex flex-col justify-center items-start">
+      <div class="flex-1 flex flex-col justify-center items-start" data-aos="fade-right" data-aos-duration="1000">
         <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass-card text-xs text-blue-300 mb-6 border border-blue-500/30">
           <span class="w-2 h-2 rounded-full bg-blue-400 animate-ping"></span>
           <span>Welcome to My Space Portfolio</span>
@@ -180,11 +225,11 @@
         </p>
 
         <div class="flex flex-wrap gap-4">
-          <a href="#hobi" class="px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-medium text-sm transition-all shadow-lg shadow-blue-500/25 flex items-center gap-2">
+          <a href="#hobi" class="px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-medium text-sm transition-all shadow-lg shadow-blue-500/25 flex items-center gap-2 hover-target">
             <span>Lihat Keahlian</span>
             <i class="fa-solid fa-arrow-right text-xs"></i>
           </a>
-          <a href="#kontak" class="px-6 py-3 rounded-lg glass-card hover:bg-white/10 text-white font-medium text-sm transition-all border border-white/10 flex items-center gap-2">
+          <a href="#kontak" class="px-6 py-3 rounded-lg glass-card hover:bg-white/10 text-white font-medium text-sm transition-all border border-white/10 flex items-center gap-2 hover-target">
             <i class="fa-regular fa-envelope text-blue-400"></i>
             <span>Kontak Email</span>
           </a>
@@ -192,21 +237,17 @@
       </div>
 
       <!-- Bagian 3D Card Foto (Kanan) -->
-      <div class="flex-1 flex justify-center lg:justify-end items-center">
-        <!-- Komponen 3D Card (Tilt Effect) -->
-        <div id="card3d" class="relative group card-3d-wrapper cursor-pointer" data-tilt data-tilt-max="25" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.4">
+      <div class="flex-1 flex justify-center lg:justify-end items-center" data-aos="fade-left" data-aos-duration="1000">
+        <div id="card3d" class="relative group card-3d-wrapper cursor-pointer hover-target" data-tilt data-tilt-max="25" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.4">
           
-          <!-- Cahaya Belakang -->
           <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-600 rounded-3xl blur-md opacity-70 group-hover:opacity-100 transition duration-500"></div>
           
-          <!-- Kartu Foto Utam -->
           <div class="relative w-64 h-80 sm:w-80 sm:h-96 rounded-3xl overflow-hidden border border-blue-400/40 glass-card p-4 flex flex-col justify-between items-center text-center shadow-2xl">
             
             <div class="w-full h-full rounded-2xl overflow-hidden relative card-3d-content">
               <img src="foto-saya.jpg" onerror="this.src=''" alt="Muh. Khoirul Khohhar" class="w-full h-full object-cover rounded-2xl transition-all duration-500" />
             </div>
 
-            <!-- Teks & Badge Melayang 3D -->
             <div class="mt-3 card-3d-content">
               <div class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-blue-900/80 border border-blue-400/40 text-xs font-semibold text-blue-200 backdrop-blur-md">
                 <i class="fa-solid fa-camera-retro text-blue-400"></i>
@@ -221,14 +262,14 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-16">
+    <section id="about" class="py-16" data-aos="fade-up" data-aos-duration="1000">
       <div class="glass-card rounded-2xl p-8 sm:p-10 relative overflow-hidden">
         <div class="max-w-3xl">
           <h2 class="font-display text-2xl sm:text-3xl font-bold text-white mb-4 flex items-center gap-3">
             <i class="fa-solid fa-user-astronaut text-blue-400"></i> Tentang Saya
           </h2>
           <p class="text-gray-300 leading-relaxed text-sm sm:text-base mb-6">
-            Nama saya <strong>Muh. Khoirul Khohhar</strong>. Saya adalah siswa kelas XII-E di SMAN 1 Gemolong dan aktif sebagai anggota Palang Merah Remaja (PMR). Saya berdomisili di Sragen, Jawa Tengah. Memiliki ketertarikan tinggi pada dunia visual, desain digital, editing kreatif, serta pembuatan situs web berpenampilan menarik.
+            Nama saya <strong>Muh. Khoirul Khohhar</strong>. Saya adalah siswa kelas XII-E di SMAN 1 Gemolong dan aktif sebagai anggota Palang Merah Remaja (PMR). Memiliki ketertarikan tinggi pada dunia visual, desain digital, editing kreatif, serta pembuatan situs web berpenampilan menarik.
           </p>
 
           <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-sm">
@@ -251,7 +292,7 @@
 
     <!-- Hobi & Keahlian Section -->
     <section id="hobi" class="py-16">
-      <div class="text-center mb-12">
+      <div class="text-center mb-12" data-aos="fade-up">
         <h2 class="font-display text-3xl font-bold text-white mb-3">Hobi & Keahlian Editor</h2>
         <p class="text-gray-400 text-sm max-w-md mx-auto">Beberapa fokus minat dan keahlian kreasi visual yang sering saya kerjakan.</p>
       </div>
@@ -259,7 +300,7 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         
         <!-- Card 1 -->
-        <div class="glass-card rounded-xl p-6 transition-all duration-300 hover:-translate-y-2" data-tilt data-tilt-max="10">
+        <div class="glass-card rounded-xl p-6 transition-all duration-300 hover:-translate-y-2 hover-target" data-aos="fade-up" data-aos-delay="100" data-tilt data-tilt-max="10">
           <div class="w-12 h-12 rounded-lg bg-blue-500/20 flex items-center justify-center mb-4 border border-blue-500/30">
             <i class="fa-solid fa-film text-xl text-blue-400"></i>
           </div>
@@ -270,12 +311,11 @@
           <div class="flex flex-wrap gap-2 text-xs">
             <span class="px-2 py-1 rounded bg-blue-500/10 text-blue-300 border border-blue-500/20">CapCut</span>
             <span class="px-2 py-1 rounded bg-blue-500/10 text-blue-300 border border-blue-500/20">LUT Profile</span>
-            <span class="px-2 py-1 rounded bg-blue-500/10 text-blue-300 border border-blue-500/20">Color Grading</span>
           </div>
         </div>
 
         <!-- Card 2 -->
-        <div class="glass-card rounded-xl p-6 transition-all duration-300 hover:-translate-y-2" data-tilt data-tilt-max="10">
+        <div class="glass-card rounded-xl p-6 transition-all duration-300 hover:-translate-y-2 hover-target" data-aos="fade-up" data-aos-delay="200" data-tilt data-tilt-max="10">
           <div class="w-12 h-12 rounded-lg bg-cyan-500/20 flex items-center justify-center mb-4 border border-cyan-500/30">
             <i class="fa-solid fa-palette text-xl text-cyan-400"></i>
           </div>
@@ -286,12 +326,11 @@
           <div class="flex flex-wrap gap-2 text-xs">
             <span class="px-2 py-1 rounded bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">Canva</span>
             <span class="px-2 py-1 rounded bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">Logo Design</span>
-            <span class="px-2 py-1 rounded bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">Poster Art</span>
           </div>
         </div>
 
         <!-- Card 3 -->
-        <div class="glass-card rounded-xl p-6 transition-all duration-300 hover:-translate-y-2" data-tilt data-tilt-max="10">
+        <div class="glass-card rounded-xl p-6 transition-all duration-300 hover:-translate-y-2 hover-target" data-aos="fade-up" data-aos-delay="300" data-tilt data-tilt-max="10">
           <div class="w-12 h-12 rounded-lg bg-indigo-500/20 flex items-center justify-center mb-4 border border-indigo-500/30">
             <i class="fa-solid fa-cubes text-xl text-indigo-400"></i>
           </div>
@@ -302,12 +341,11 @@
           <div class="flex flex-wrap gap-2 text-xs">
             <span class="px-2 py-1 rounded bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">Pixel Art</span>
             <span class="px-2 py-1 rounded bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">Minecraft Build</span>
-            <span class="px-2 py-1 rounded bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">Banner Design</span>
           </div>
         </div>
 
         <!-- Card 4 -->
-        <div class="glass-card rounded-xl p-6 transition-all duration-300 hover:-translate-y-2" data-tilt data-tilt-max="10">
+        <div class="glass-card rounded-xl p-6 transition-all duration-300 hover:-translate-y-2 hover-target" data-aos="fade-up" data-aos-delay="400" data-tilt data-tilt-max="10">
           <div class="w-12 h-12 rounded-lg bg-blue-500/20 flex items-center justify-center mb-4 border border-blue-500/30">
             <i class="fa-solid fa-code text-xl text-blue-400"></i>
           </div>
@@ -318,12 +356,11 @@
           <div class="flex flex-wrap gap-2 text-xs">
             <span class="px-2 py-1 rounded bg-blue-500/10 text-blue-300 border border-blue-500/20">HTML/CSS</span>
             <span class="px-2 py-1 rounded bg-blue-500/10 text-blue-300 border border-blue-500/20">Tailwind</span>
-            <span class="px-2 py-1 rounded bg-blue-500/10 text-blue-300 border border-blue-500/20">JavaScript</span>
           </div>
         </div>
 
         <!-- Card 5 -->
-        <div class="glass-card rounded-xl p-6 transition-all duration-300 hover:-translate-y-2" data-tilt data-tilt-max="10">
+        <div class="glass-card rounded-xl p-6 transition-all duration-300 hover:-translate-y-2 hover-target" data-aos="fade-up" data-aos-delay="500" data-tilt data-tilt-max="10">
           <div class="w-12 h-12 rounded-lg bg-teal-500/20 flex items-center justify-center mb-4 border border-teal-500/30">
             <i class="fa-solid fa-language text-xl text-teal-400"></i>
           </div>
@@ -338,7 +375,7 @@
         </div>
 
         <!-- Card 6 -->
-        <div class="glass-card rounded-xl p-6 transition-all duration-300 hover:-translate-y-2" data-tilt data-tilt-max="10">
+        <div class="glass-card rounded-xl p-6 transition-all duration-300 hover:-translate-y-2 hover-target" data-aos="fade-up" data-aos-delay="600" data-tilt data-tilt-max="10">
           <div class="w-12 h-12 rounded-lg bg-purple-500/20 flex items-center justify-center mb-4 border border-purple-500/30">
             <i class="fa-solid fa-gamepad text-xl text-purple-400"></i>
           </div>
@@ -356,7 +393,7 @@
     </section>
 
     <!-- Section Kontak Gmail -->
-    <section id="kontak" class="py-16">
+    <section id="kontak" class="py-16" data-aos="zoom-in" data-aos-duration="800">
       <div class="glass-card rounded-2xl p-8 sm:p-12 text-center relative overflow-hidden border border-blue-500/30">
         <div class="w-16 h-16 rounded-full bg-blue-600/20 border border-blue-500/40 flex items-center justify-center mx-auto mb-6">
           <i class="fa-regular fa-paper-plane text-2xl text-blue-400"></i>
@@ -371,17 +408,17 @@
         <div class="inline-flex items-center gap-3 bg-black/40 px-5 py-3 rounded-xl border border-white/10 mb-8 max-w-full overflow-x-auto">
           <i class="fa-regular fa-envelope text-blue-400 text-lg"></i>
           <span id="emailText" class="font-mono text-sm sm:text-base text-gray-200">kohhar2008@gmail.com</span>
-          <button onclick="copyEmail()" title="Salin Email" class="ml-2 text-gray-400 hover:text-white transition-colors">
+          <button onclick="copyEmail()" title="Salin Email" class="ml-2 text-gray-400 hover:text-white transition-colors hover-target">
             <i class="fa-regular fa-copy"></i>
           </button>
         </div>
 
         <div class="flex flex-wrap justify-center gap-4">
-          <a href="mailto:kohhar2008@gmail.com" target="_blank" class="px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm transition-all shadow-lg shadow-blue-500/30 flex items-center gap-2">
+          <a href="mailto:kohhar2008@gmail.com" target="_blank" class="px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm transition-all shadow-lg shadow-blue-500/30 flex items-center gap-2 hover-target">
             <i class="fa-solid fa-envelope"></i>
             <span>Buka di Gmail</span>
           </a>
-          <button onclick="copyEmail()" class="px-6 py-3 rounded-lg glass-card hover:bg-white/10 text-white font-semibold text-sm transition-all border border-white/10 flex items-center gap-2">
+          <button onclick="copyEmail()" class="px-6 py-3 rounded-lg glass-card hover:bg-white/10 text-white font-semibold text-sm transition-all border border-white/10 flex items-center gap-2 hover-target">
             <i class="fa-regular fa-copy text-blue-400"></i>
             <span>Salin Alamat Email</span>
           </button>
@@ -395,7 +432,7 @@
   <footer class="border-t border-white/5 py-8 text-center text-xs text-gray-500">
     <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
       <p>&copy; 2026 Muh. Khoirul Khohhar. All rights reserved.</p>
-      <p class="text-gray-400">Dibuat dengan HTML, Tailwind CSS & JavaScript</p>
+      <p class="text-gray-400">Dibuat dengan HTML, Tailwind CSS & JS (AOS & Tilt)</p>
     </div>
   </footer>
 
@@ -405,9 +442,35 @@
     <span>Alamat Gmail berhasil disalin!</span>
   </div>
 
-  <!-- JavaScript Effects -->
+  <!-- AOS JS Script (GitHub Animate On Scroll) -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+  <!-- JavaScript Animations -->
   <script>
-    // 1. STARFIELD ANIMATION CANVAS
+    // 1. Inisialisasi Animate On Scroll (AOS)
+    AOS.init({
+      once: true,
+      duration: 800,
+    });
+
+    // 2. Kursor Kustom Interaktif
+    const cursor = document.getElementById('custom-cursor');
+    const dot = document.getElementById('cursor-dot');
+    const hoverTargets = document.querySelectorAll('.hover-target');
+
+    window.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+      dot.style.left = e.clientX + 'px';
+      dot.style.top = e.clientY + 'px';
+    });
+
+    hoverTargets.forEach(target => {
+      target.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+      target.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+    });
+
+    // 3. Canvas Background Efek Bintang
     const canvas = document.getElementById('starfield');
     const ctx = canvas.getContext('2d');
 
@@ -422,9 +485,7 @@
     resizeCanvas();
 
     class Star {
-      constructor() {
-        this.reset();
-      }
+      constructor() { this.reset(); }
       reset() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
@@ -434,9 +495,7 @@
       }
       update() {
         this.alpha += this.speed;
-        if (this.alpha >= 1 || this.alpha <= 0) {
-          this.speed = -this.speed;
-        }
+        if (this.alpha >= 1 || this.alpha <= 0) this.speed = -this.speed;
       }
       draw() {
         ctx.fillStyle = `rgba(255, 255, 255, ${Math.abs(this.alpha)})`;
@@ -446,21 +505,16 @@
       }
     }
 
-    for (let i = 0; i < numStars; i++) {
-      stars.push(new Star());
-    }
+    for (let i = 0; i < numStars; i++) stars.push(new Star());
 
     function animateStars() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      stars.forEach(star => {
-        star.update();
-        star.draw();
-      });
+      stars.forEach(star => { star.update(); star.draw(); });
       requestAnimationFrame(animateStars);
     }
     animateStars();
 
-    // 2. DYNAMIC TYPING EFFECT
+    // 4. Dynamic Typing Effect
     const words = ["Editor Video CapCut", "Graphic Designer", "Pixel Artist", "Siswa SMA N 1 Gemolong"];
     let i = 0;
     let timer;
@@ -486,11 +540,7 @@
           word.pop();
           document.getElementById('typing').innerHTML = word.join("");
         } else {
-          if (words.length > (i + 1)) {
-            i++;
-          } else {
-            i = 0;
-          }
+          i = (words.length > (i + 1)) ? i + 1 : 0;
           typingEffect();
           return false;
         }
@@ -498,22 +548,19 @@
       };
       loopDeleting();
     }
-
     typingEffect();
 
-    // 3. COPY EMAIL TO CLIPBOARD
+    // 5. Salin Email
     function copyEmail() {
       const email = "kohhar2008@gmail.com";
       navigator.clipboard.writeText(email).then(() => {
         const toast = document.getElementById('toast');
         toast.classList.remove('translate-y-20', 'opacity-0');
-        setTimeout(() => {
-          toast.classList.add('translate-y-20', 'opacity-0');
-        }, 3000);
+        setTimeout(() => toast.classList.add('translate-y-20', 'opacity-0'), 3000);
       });
     }
 
-    // 4. INETILIZE VANILLA TILT FOR 3D CARD
+    // 6. Inisialisasi 3D Card Tilt
     VanillaTilt.init(document.querySelector("#card3d"), {
       max: 25,
       speed: 400,
